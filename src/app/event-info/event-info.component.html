@@ -1,0 +1,74 @@
+<!-- <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Search columns" #input>
+</mat-form-field>
+
+<table class="event-info-table">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>BaseEventIds</th>
+        <th>DeviceEventClassId</th>
+        <th>DeviceProduct</th>
+        <th>DeviceVendor</th>
+        <th>ParentEventId</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let event of filteredData ? filteredData : eventsData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ event._fields.BaseEventIds }}</td>
+            <td>{{ event._fields.DeviceEventClassId }}</td>
+            <td>{{ event._fields.DeviceProduct }}</td>
+            <td>{{ event._fields.DeviceVendor }}</td>
+            <td>{{ event._fields.ParentEventId }}</td>
+        </tr>
+    </tbody>
+</table> -->
+
+
+<div fxLayout="column" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutAlign="start">
+    <div fxFlex="100%" fxFlex.lt-md="100%" fxFlex.lt-lg="50%" class="event-info-div">
+      <table datatable [dtOptions]="dtOptions" class="row-border hover event-info-table">
+        <!-- <tfoot>
+          <tr>
+            <th><input type="text" placeholder="Search No" name="search-id"/></th>
+            <th><input type="text" placeholder="Search DeviceProduct" name="search-DeviceProduct"/></th>
+            <th><input type="text" placeholder="Search DeviceVendor" name="search-DeviceVendor"/></th>
+            <th><input type="text" placeholder="Search ParentEventId" name="search-ParentEventId"/></th>
+          </tr>
+        </tfoot> -->
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>DeviceEventClassId</th>
+            <th>DeviceProduct</th>
+            <th>DeviceVendor</th>
+            <th>detectionTime</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr>
+            <th><input type="text" placeholder="Search No" name="search-id"/></th>
+            <th><input type="text" placeholder="Search BaseEventIds" name="search-first-name"/></th>
+            <th><input type="text" placeholder="Search DeviceEventClassId" name="search-last-name"/></th>
+            <th><input type="text" placeholder="Search DeviceProduct" name="search-DeviceProduct"/></th>
+            <th><input type="text" placeholder="Search DeviceVendor" name="search-DeviceVendor"/></th>
+            <th><input type="text" placeholder="Search ParentEventId" name="search-ParentEventId"/></th>
+          </tr> -->
+          <tr *ngFor="let event of eventsData; let i = index" (click)="openModal(event)">
+            <td>{{ i + 1 }}</td>
+            <td>{{ event._fields.DeviceEventClassId }}</td>
+            <td>{{ event._fields.DeviceProduct }}</td>
+            <td>{{ event._fields.DeviceVendor }}</td>
+            <td>{{ event._rawDataFields.detectionTime }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<app-event-field *ngIf="isModalOpen" [rowData]="selectedRow" (closeModal)="closeModal()"></app-event-field>

@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{ data.name }}</h2>
+<mat-dialog-content>
+  <div class="detail">
+    <b>Alert Name:</b> <span id="alert-name">{{ data.name }}</span>
+  </div>
+  <div class="detail" *ngFor="let item of data._fields | keyvalue">
+    <b>{{ item.key }}:</b>&nbsp;  <span>{{ item.value }}</span>
+  </div>
+  <div class="detail" *ngFor="let item of data._rawDataFields | keyvalue">
+    <b>{{ item.key }}:</b>&nbsp;  <span>{{ item.value }}</span>
+  </div>
+  <!-- Other content fields -->
+</mat-dialog-content>
+<mat-dialog-actions class="modal-bottom">
+  <button mat-button (click)="dialogRef.close()">Close</button>
+</mat-dialog-actions>
